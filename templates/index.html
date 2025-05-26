@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>City-wise Excel View</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+    <h1>Upload Excel File</h1>
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload') }}">
+        <input type="file" name="excel" accept=".xlsx" required>
+        <input type="text" name="prefix" placeholder="Enter PDF prefix" value="">
+        <button type="submit">Upload and View</button>
+    </form>
+
+    <br>
+    <form action="{{ url_for('download_zip') }}">
+            <button type="submit">Download All PDFs as ZIP</button>
+    </form>
+    
+</body>
+</html>

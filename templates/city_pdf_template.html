@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ city }} - Report</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+
+        h2 {
+            background: #f0f0f0;
+            padding: 8px;
+            border-left: 5px solid #007BFF;
+            font-size: 18px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 5px;
+            word-wrap: break-word;
+            vertical-align: top;
+            font-size: 10pt;
+        }
+
+        th {
+                background-color: #f2f2f2;
+                font-size: 7pt;  /* <- Set a larger/different size for headers */
+              font-weight: bold;
+          } 
+
+
+        /* Adjust width of the Address column */
+        {% for col in headers %}
+            {% if col.lower() == 'address' %}
+                th:nth-child({{ loop.index }}),
+                td:nth-child({{ loop.index }}) {
+                    width: 300px;
+                    max-width: 300px;
+                }
+            {% endif %}
+        {% endfor %}
+    </style>
+</head>
+<body>
+    <h2>{{ city }}</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for col in headers %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    {% for col in headers %}
+                        <td>{{ row[col] }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
